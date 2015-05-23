@@ -12,7 +12,7 @@
 #include <map>
 #include <utility>
 #include <vector>
-
+#include <typeinfo>
 #include "IElement.h"
 
 
@@ -65,6 +65,8 @@ public:
 	}
 
 
+
+
 	virtual bool AddElemnet(KeyType key,const IElement& element){
 		IElement* cloneObj = element.Clone();
 		m_subElements.insert(std::make_pair(key,cloneObj));
@@ -78,19 +80,31 @@ public:
 		return NULL;
 	}
 
-	virtual Elements::IElement* GetElement(const void * key)  {
-		if (key==NULL) return NULL;
+	virtual IElement* operator[](KeyType key){
 
-		KeyType x= *((KeyType*)key);
-		if (x>0){
+		IElement* retElm=GetElement(key);
 
-			return m_subElements[x];
-
+		if (!retElm){
+				AddElemnet(key,AElement<T>());
 		}
-		return NULL;
-
+		retElm = m_subElements[key];
+		return retElm;
 	}
 
+	virtual void operator=(void* data){
+
+		   T *d = (T*)data;
+
+		   if (d)
+			   m_data=*d;
+	}
+
+	virtual void operator=(IElement* elm){
+		if (elm)
+		{
+			this->m_data = (*(T*)elm->GetData());
+		}
+	}
 
 	virtual AElement<T>* Clone() const{
 		return new AElement<T>(*this);

@@ -42,10 +42,37 @@ bool testAbstartInterger(const T& item)
 	return ret;
 }
 
+template<class T, class U>
+bool testConcarnetElemnets(const T& data1, const U& data2)
+{
+	PRINT_LINE;
+	bool ret=true;
+	std::cout<<"test ConcarnetElemnets..."<<std::endl;
+
+	IElement* elmA = new AElement<T>(data1);
+
+	IElement* subElmA = new AElement<U>(data2);
+	std::cout << "data on subElmA is " <<*((U*)subElmA->GetData()) <<std::endl;
+	elmA[0]=subElmA;
+	U* dataSubA=(U*) elmA[0].GetData();
+	ret= (*dataSubA ==data2);
+
+	std::cout << "test result sub elements by operators  ..." << (ret? "success" : "failed")<<std::endl;
+	PRINT_LINE;
+#define TEST_NUM_DATA 8
+	std::cout <<"testing regular sub element using..." <<std::endl;
+	elmA->AddElemnet(1,*(new AElement<int>(TEST_NUM_DATA)));
+	ret= (elmA->GetElement(1) && (*(int*)(elmA->GetElement(1)->GetData()))==TEST_NUM_DATA);
+	std::cout << "results or normal subTesting ..."<<(ret ? "success" : "failed" )<<std::endl;
+
+	return ret;
+}
+
 int main()
 {
 	int t;
 	testAbstartInterger<int>(6);
 	testAbstartInterger<std::string>("koko");
+	testConcarnetElemnets<int,std::string>(5,"colo");
 	std::cin>>t;
 }
