@@ -61,11 +61,29 @@ bool testConcarnetElemnets(const T& data1, const U& data2)
 	PRINT_LINE;
 #define TEST_NUM_DATA 8
 	std::cout <<"testing regular sub element using..." <<std::endl;
-	elmA->AddElemnet(1,*(new AElement<int>(TEST_NUM_DATA)));
-	ret= (elmA->GetElement(1) && (*(int*)(elmA->GetElement(1)->GetData()))==TEST_NUM_DATA);
+	elmA->AddElemnet(1,new AElement<T>(TEST_NUM_DATA));
+	ret= (elmA->GetElement(1) && (*(T*)(elmA->GetElement(1)->GetData()))==TEST_NUM_DATA);
 	std::cout << "results or normal subTesting ..."<<(ret ? "success" : "failed" )<<std::endl;
 
 	return ret;
+}
+
+template<class T, class U>
+void runToStringTest(T dataA,U dataB){
+	//IElement* ae = new AElement<T>(dataA);
+	AElement<T> t(dataA);
+	IElement* typeB = new AElement<U>(dataB);
+	t.AddElemnet(0,typeB);
+	t.AddElemnet(1,new AElement<T>(dataA));
+	t[1]->AddElemnet(0,new AElement<T>(dataA));
+
+	//IElement* temp =new  AElement<T>(dataA);
+
+
+
+	//a[1]=
+	//a[1][0]= new AElement<T>(dataA); this sould work...
+	std::cout<<"result print :" <<t.ToString();
 }
 
 int main()
@@ -74,5 +92,6 @@ int main()
 	testAbstartInterger<int>(6);
 	testAbstartInterger<std::string>("koko");
 	testConcarnetElemnets<int,std::string>(5,"colo");
+	runToStringTest<int,std::string>(2,"sos");
 	std::cin>>t;
 }

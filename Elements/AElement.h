@@ -14,27 +14,21 @@
 #include <vector>
 #include <typeinfo>
 #include "IElement.h"
+#include <sstream>
 
 
 namespace Elements{
 
-
-
-
-
 //typedef SubElmsType
 typedef std::map<KeyType,IElement*> subElmType;
+
 
 template <typename T>
 class AElement: public IElement {
 
-
-
-
 public:
 	AElement(){}
 	AElement(const T& data):m_data(data){};
-
 
 	virtual void* GetData() const {return (void*)&m_data;};
 	virtual void SetData(const T& data) {m_data=data;};
@@ -57,6 +51,16 @@ public:
 		return retElms;
 	}
 
+	virtual IElement* Clone() const{
+		IElement* cloneElm = new AElement<T>(m_data);
+		subElmType::const_iterator it = m_subElements.begin();
+		for(;it !=m_subElements.end();++it)
+		{
+			cloneElm->AddElemnet(it->first,it->second->Clone());
+		}
+		return cloneElm;
+	}
+
 	virtual void GetElemnets(IElement** pOutElements) const //need to add this
 	{
 		std::vector<IElement*> retElm = GetElemnets();
@@ -64,11 +68,8 @@ public:
 			pOutElements=&retElm[0];
 	}
 
-
-
-
-	virtual bool AddElemnet(KeyType key,const IElement& element){
-		IElement* cloneObj = element.Clone();
+	virtual bool AddElemnet(KeyType key,const IElement* element){
+		IElement* cloneObj = element->Clone();
 		m_subElements.insert(std::make_pair(key,cloneObj));
 		return true;
 	}
@@ -79,46 +80,100 @@ public:
 
 		return NULL;
 	}
+/*
+	virtual IElement* operator[] (IElement* elm)
+	{
+		subElmType::const_iterator it = m_subElements.begin();
+		for (;it != m_subElements.end();++it)
+		{
+			if (it->second==elm)
+			{
+				return it->second;
+			}
+		}
+		return NULL;
+	}
+*/
 
 	virtual IElement* operator[](KeyType key){
 
 		IElement* retElm=GetElement(key);
 
 		if (!retElm){
-				AddElemnet(key,AElement<T>());
+				AddElemnet(key,new AElement<T>());
 		}
-		retElm = m_subElements[key];
-		return retElm;
-	}
+		return  m_subElements[key];
 
+	}
+/*
 	virtual void operator=(void* data){
 
 		   T *d = (T*)data;
-
 		   if (d)
 			   m_data=*d;
 	}
+*/
+	/*virtual IElement* operator=(IElement* elm){
+		if (elm)
+		{
+			this->m_data = (*(T*)elm->GetData());
 
-	virtual void operator=(IElement* elm){
+		}
+		return this;
+	}*/
+
+	virtual IElement* operator = (const IElement* elm){
+		if (elm){
+			m_data= *((T*)elm->GetData());
+		}
+		return this;
+	}
+	/*
+	virtual IElement* operator = (const AElement<T> & elm)
+	{
+		SetDataElm(*elm);
+		return this;
+
+	}*/
+
+
+	//virtual void MergeElements(const std::map<K,EleType>& elements) ;
+
+
+	virtual std::string ToString()
+	{
+		std::stringstream strStream;
+		if (m_subElements.size()==0){
+			strStream<<m_data <<std::endl;
+
+		}
+		else {
+			strStream<<"data:" <<m_data<<std::endl;
+			strStream<<"\t|__sub Elements:" <<std::endl;
+			subElmType::const_iterator it = m_subElements.begin();
+			for (; it!=m_subElements.end(); ++it){
+				strStream<<"["<<it->first<<"]"<<"|__"<<it->second->ToString();
+			}
+		}
+		return strStream.str();
+	}
+
+	virtual IElement* operator = (std::pair<KeyType, IElement*> elm) {
+		this->m_subElements.insert(elm);
+		return this;
+	}
+
+private :
+	void SetDataElm(IElement* elm)
+	{
 		if (elm)
 		{
 			this->m_data = (*(T*)elm->GetData());
 		}
 	}
 
-	virtual AElement<T>* Clone() const{
-		return new AElement<T>(*this);
-	}
-	//virtual void MergeElements(const std::map<K,EleType>& elements) ;
-
-private :
-
-
 	T m_data;
 	subElmType m_subElements ;
-
-
-
 };
 
 }; //Elements
