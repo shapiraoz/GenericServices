@@ -9,15 +9,6 @@
 
 namespace Serialization {
 
-ASerializer::ASerializer() {
-	// TODO Auto-generated constructor stub
-
-}
-
-ASerializer::~ASerializer() {
-	// TODO Auto-generated destructor stub
-}
-
 
 
 

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <stdio.h>
 #include "../Elements/AElement.h"
+#include "../Serialization/XMLSerializer.h"
+
 
 using namespace Elements;
 
@@ -89,9 +91,15 @@ void runToStringTest(T dataA,U dataB){
 int main()
 {
 	int t;
+
+
+
+
 	testAbstartInterger<int>(6);
 	testAbstartInterger<std::string>("koko");
 	testConcarnetElemnets<int,std::string>(5,"colo");
 	runToStringTest<int,std::string>(2,"sos");
+	//IElement* aq = new AElement<int>(5);
+	//Serialization::ISerializer* ser = new Serialization::XMLSerializer(as);
 	std::cin>>t;
 }

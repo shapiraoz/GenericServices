@@ -9,12 +9,18 @@
 
 namespace Serialization {
 
-XMLSerializer::XMLSerializer() {
+
+XMLSerializer::XMLSerializer( IElement* elm,const std::string & filePath):ASerializer(elm) {
+	this->m_filePath = filePath;
+}
+
+
+XMLSerializer::XMLSerializer( IElement* elm) :ASerializer(elm)  {
 	// TODO Auto-generated constructor stub
 
 }
 
-XMLSerializer::~XMLSerializer() {
+XMLSerializer::~XMLSerializer(){
 	// TODO Auto-generated destructor stub
 }
 
@@ -28,11 +34,11 @@ bool XMLSerializer::Serialize() {
 	return NULL;
 }
 
-
  IElement* XMLSerializer::DeSerialize(const std::string& filePath )
  {
 	 return NULL;
  }
+
 
  bool XMLSerializer::Serialize(const std::string& filePath ) {
 

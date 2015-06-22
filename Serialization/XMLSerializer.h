@@ -11,18 +11,17 @@
 #include <string>
 #include "ASerializer.h"
 
-
+using namespace Elements;
 namespace Serialization {
 
 class XMLSerializer: public ASerializer {
 public:
-	XMLSerializer();
-	XMLSerializer(const std::string & filePath);
+	XMLSerializer( IElement* elm) ;
+	XMLSerializer( IElement* elm,const std::string & filePath);
 	virtual ~XMLSerializer();
 
-	virtual bool Serialize();
-	virtual IElement* DeSerialize();
-
+	virtual bool Serialize() ;
+	virtual IElement* DeSerialize() ;
 
 	virtual IElement* DeSerialize(const std::string& filePath);
 	virtual bool Serialize(const std::string& filePath);

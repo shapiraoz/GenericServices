@@ -17,21 +17,21 @@ using boost::property_tree::ptree;
 #endif
 
 
-#include "Iserializer.h"
+#include "ISerializer.h"
 
 namespace Serialization{
 
 class ASerializer: public ISerializer {
 public:
-	ASerializer();
-	virtual ~ASerializer();
+	ASerializer(IElement* elm):m_element(elm){};
+	virtual ~ASerializer(){};
 protected :
 
 #if BOOST
 	 ptree m_pt;
 #endif
 	 std::string m_filePath;
-	 IElement* m_element ;
+	 Elements::IElement* m_element ;
 };
 }
 #endif /* SERIALIZATION_ASERIALIZER_H_ */

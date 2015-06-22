@@ -17,10 +17,12 @@
 #include <sstream>
 
 
+
 namespace Elements{
 
 //typedef SubElmsType
 typedef std::map<KeyType,IElement*> subElmType;
+typedef std::vector<Serialization::ISerializer*> serialzersType;
 
 
 template <typename T>
@@ -80,20 +82,16 @@ public:
 
 		return NULL;
 	}
-/*
-	virtual IElement* operator[] (IElement* elm)
-	{
-		subElmType::const_iterator it = m_subElements.begin();
-		for (;it != m_subElements.end();++it)
-		{
-			if (it->second==elm)
-			{
-				return it->second;
-			}
+
+	bool RegisterSerializer(Serialization::ISerializer * serializer){
+		if (serializer!=NULL){
+			m_serializers.push_back(serializer);
+		return true;
 		}
-		return NULL;
+		return false;
 	}
-*/
+
+	virtual bool Save();
 
 	virtual IElement* operator[](KeyType key){
 
@@ -105,22 +103,7 @@ public:
 		return  m_subElements[key];
 
 	}
-/*
-	virtual void operator=(void* data){
 
-		   T *d = (T*)data;
-		   if (d)
-			   m_data=*d;
-	}
-*/
-	/*virtual IElement* operator=(IElement* elm){
-		if (elm)
-		{
-			this->m_data = (*(T*)elm->GetData());
-
-		}
-		return this;
-	}*/
 
 	virtual IElement* operator = (const IElement* elm){
 		if (elm){
@@ -128,17 +111,6 @@ public:
 		}
 		return this;
 	}
-	/*
-	virtual IElement* operator = (const AElement<T> & elm)
-	{
-		SetDataElm(*elm);
-		return this;
-
-	}*/
-
-
-	//virtual void MergeElements(const std::map<K,EleType>& elements) ;
-
 
 	virtual std::string ToString()
 	{
@@ -163,6 +135,9 @@ public:
 		return this;
 	}
 
+protected :
+
+
 private :
 	void SetDataElm(IElement* elm)
 	{
@@ -174,6 +149,7 @@ private :
 
 	T m_data;
 	subElmType m_subElements ;
+	serialzersType m_serializers;
 };
 
 }; //Elements

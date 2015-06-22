@@ -11,18 +11,18 @@
 #include <map>
 #include <string>
 
+
 #include <stddef.h>
 
 
 
 typedef int KeyType;
-
-
+namespace Serialization {
+class ISerializer; //forward declartion
+}
+struct SerializationTo;
 
 namespace Elements{
-
-
-
 
 class IElement {
 public:
@@ -37,6 +37,10 @@ public:
 	virtual IElement* GetElement(const KeyType key) =0;
 	virtual IElement* Clone() const= 0;
 	virtual IElement* operator[] (const KeyType key ) = 0;
+	virtual bool RegisterSerializer(Serialization::ISerializer * serializer) =0;
+	virtual bool Save() = 0;
+
+
 	//virtual IElement* operator[] (IElement* elm) = 0;
 	//virtual void operator = (void* data)=0;
 	//virtual IElement* operator = (IElement* elm)=0;
