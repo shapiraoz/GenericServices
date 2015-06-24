@@ -18,7 +18,7 @@
 
 typedef int KeyType;
 namespace Serialization {
-class ISerializer; //forward declartion
+class ISerializer; //forward declaration
 }
 struct SerializationTo;
 
@@ -33,17 +33,15 @@ public:
 	virtual void SetData(const void * data) = 0;
 	virtual std::vector<IElement*> GetElemnets() const= 0;
 	virtual bool AddElemnet(KeyType key,const IElement* element) =0;
+	virtual bool AddElemnet(IElement* element) =0;
 	virtual void GetElemnets(IElement** pOutElements) const= 0;
 	virtual IElement* GetElement(const KeyType key) =0;
 	virtual IElement* Clone() const= 0;
 	virtual IElement* operator[] (const KeyType key ) = 0;
 	virtual bool RegisterSerializer(Serialization::ISerializer * serializer) =0;
 	virtual bool Save() = 0;
-
-
-	//virtual IElement* operator[] (IElement* elm) = 0;
-	//virtual void operator = (void* data)=0;
-	//virtual IElement* operator = (IElement* elm)=0;
+	virtual bool ChangeName(const std::string & name) =0;
+	virtual KeyType GetId() const= 0;
 
 	virtual IElement* operator = (const IElement* elm)=0;
 	virtual IElement* operator = (std::pair<KeyType, IElement*> elm) =0;

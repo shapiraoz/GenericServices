@@ -1,5 +1,4 @@
-
-#######################################################################
+######################################################################
 # Simple make file 
 #
 # 
@@ -14,10 +13,10 @@ SRCDIR := .
 INCDIR := .
 OBJDIR := .
 
-SRC :=  $(SRCDIR)/Elements/AElement.cpp \
+SRC :=  	$(SRCDIR)/Elements/AElement.cpp \
 		$(SRCDIR)/Serialization/XMLSerializer.cpp \
 		$(SRCDIR)/UT/ElementsUT.cpp
-	
+			
 
 EXE := GenericServiceUT
 

@@ -5,7 +5,7 @@
  *      Author: oz
  */
 #include "AElement.h"
-
+#include <cstdlib>
 #include "../Serialization/ISerializer.h"
 
 #include <string>
@@ -17,20 +17,23 @@ template class AElement<std::string>;
 template class AElement<int>;
 */
 namespace Elements{
+
+
 template <typename T>
 bool AElement<T>::Save(){
 	serialzersType::iterator it =  m_serializers.begin();
-			for (; it != m_serializers.end(); ++it)
-			{
-				Serialization::ISerializer* item =  *it;
-				item->Serialize();
-			}
-			return true;
+	for (; it != m_serializers.end(); ++it)
+	{
+		Serialization::ISerializer* item =  *it;
+		item->Serialize();
+	}
+	return true;
 }
 
 template <>
 bool AElement<std::string>::Save()
 {
+
 	serialzersType::iterator it =  m_serializers.begin();
 		for (; it != m_serializers.end(); ++it)
 		{
@@ -38,6 +41,7 @@ bool AElement<std::string>::Save()
 			item->Serialize();
 		}
 		return true;
+
 }
 template <>
 bool AElement<int>::Save(){

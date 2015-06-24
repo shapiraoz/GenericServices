@@ -6,7 +6,7 @@
  */
 
 #include "XMLSerializer.h"
-
+#include  <vector>
 namespace Serialization {
 
 
@@ -26,7 +26,13 @@ XMLSerializer::~XMLSerializer(){
 
 bool XMLSerializer::Serialize() {
 
-	return false;
+	if (m_element==NULL) return false;
+
+	std::vector<IElement*> subelm = m_element->GetElemnets();
+	//std::vector<IElement*>::i
+
+	return true;
+
 }
 
  IElement* XMLSerializer::DeSerialize(){
