@@ -29,7 +29,7 @@ bool XMLSerializer::Serialize() {
 	if (m_element==NULL || m_filePath.empty()) return false;
 	try
 	{
-		ptree node =  m_pt.add("Element",m_element->GetDataSting());
+		ptree & node =  m_pt.add("Element",m_element->GetDataSting());
 		m_pt.add("Element.<xmlattr>.ID","123");
 		m_pt.add("Element.<xmlattr>.Name",m_element->GetName());
 
@@ -37,13 +37,13 @@ bool XMLSerializer::Serialize() {
 
 		std::vector<IElement*>::const_iterator it = subelm.begin();
 		for (;it != subelm.end();++it ){
-			ptree subNode;
+
 
 			IElement* elm = *it;
-			subNode.add("Element",elm->GetDataSting());
-			subNode.add("Element.<xmlattr>.Id",elm->GetIdStr());
-			subNode.add("Element.<xmlattr>.Name",elm->GetName());
-			node.add_child("Elements",subNode);
+			node.add("Element",elm->GetDataSting());
+			node.add("Element.<xmlattr>.Id",elm->GetIdStr());
+			node.add("Element.<xmlattr>.Name",elm->GetName());
+			//node.add_child("Elements",subNode);
 
 
 		}
