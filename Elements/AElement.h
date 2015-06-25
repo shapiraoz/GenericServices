@@ -45,9 +45,26 @@ public:
 	virtual KeyType GetId() const {
 		return m_id;
 	}
+
+	virtual std::string GetName() const{
+		return m_name;
+	}
+
 	virtual void* GetData() const {
 		return (void*) &m_data;
 	}
+	virtual std::string GetDataSting() const{
+		std::stringstream out;
+		out<<m_data ;
+		return out.str();
+	}
+
+	std::string GetIdStr() const{
+		std::stringstream out;
+		out<<m_id ;
+		return out.str();
+	}
+
 	;
 	virtual void SetData(const T& data) {
 		m_data = data;

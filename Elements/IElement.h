@@ -30,6 +30,7 @@ public:
 
 	virtual ~IElement(){};
 	virtual void* GetData() const= 0;
+	virtual std::string GetDataSting() const =0;
 	virtual void SetData(const void * data) = 0;
 	virtual std::vector<IElement*> GetElemnets() const= 0;
 	virtual bool AddElemnet(KeyType key,const IElement* element) =0;
@@ -41,8 +42,9 @@ public:
 	virtual bool RegisterSerializer(Serialization::ISerializer * serializer) =0;
 	virtual bool Save() = 0;
 	virtual bool ChangeName(const std::string & name) =0;
+	virtual std::string GetName() const =0;
 	virtual KeyType GetId() const= 0;
-
+	virtual std::string GetIdStr() const =0;
 	virtual IElement* operator = (const IElement* elm)=0;
 	virtual IElement* operator = (std::pair<KeyType, IElement*> elm) =0;
 	virtual std::string ToString()=0;

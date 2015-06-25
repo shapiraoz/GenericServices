@@ -99,7 +99,9 @@ int main()
 	testAbstartInterger<std::string>("koko");
 	testConcarnetElemnets<int,std::string>(5,"colo");
 	runToStringTest<int,std::string>(2,"sos");
-	//IElement* aq = new AElement<int>(5);
-	//Serialization::ISerializer* ser = new Serialization::XMLSerializer(as);
-	std::cin>>t;
+	IElement* aq = new AElement<int>(5);
+	aq->AddElemnet(new AElement<std::string> ("koko"));
+	Serialization::ISerializer* ser = new Serialization::XMLSerializer(aq,"test.xml");
+	ser->Serialize();
+	//std::cin>>t;
 }

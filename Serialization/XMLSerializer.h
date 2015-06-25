@@ -8,8 +8,10 @@
 #ifndef SERIALIZATION_XMLSERIALIZER_H_
 #define SERIALIZATION_XMLSERIALIZER_H_
 
+
 #include <string>
 #include "ASerializer.h"
+#include <boost/property_tree/xml_parser.hpp>
 
 using namespace Elements;
 namespace Serialization {
