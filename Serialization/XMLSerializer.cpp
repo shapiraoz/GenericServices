@@ -47,7 +47,7 @@ bool XMLSerializer::Serialize() {
 
 
 		}
-		boost::property_tree::xml_writer_settings<char> settings('\t', 1);
+		//boost::property_tree::xml_writer_settings<char> settings('\t', 1);
 
 		write_xml(m_filePath,m_pt);//,std::locale(),settings);
 	} catch(...){
@@ -60,7 +60,8 @@ bool XMLSerializer::Serialize() {
 
 }
 
- IElement* XMLSerializer::DeSerialize(){
+ IElement* XMLSerializer::DeSerialize()
+ {
 
 	return NULL;
 }

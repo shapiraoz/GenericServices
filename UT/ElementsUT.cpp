@@ -80,9 +80,6 @@ void runToStringTest(T dataA,U dataB){
 	t[1]->AddElemnet(0,new AElement<T>(dataA));
 
 	//IElement* temp =new  AElement<T>(dataA);
-
-
-
 	//a[1]=
 	//a[1][0]= new AElement<T>(dataA); this sould work...
 	std::cout<<"result print :" <<t.ToString();
@@ -91,10 +88,7 @@ void runToStringTest(T dataA,U dataB){
 int main()
 {
 	int t;
-
-
-
-
+	
 	testAbstartInterger<int>(6);
 	testAbstartInterger<std::string>("koko");
 	testConcarnetElemnets<int,std::string>(5,"colo");
