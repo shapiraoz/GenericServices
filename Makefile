@@ -13,12 +13,13 @@ SRCDIR := .
 INCDIR := .
 OBJDIR := .
 
-SRC :=  	$(SRCDIR)/Elements/AElement.cpp \
+SRC :=  	$(SRCDIR)/Types.cpp \
+		$(SRCDIR)/Elements/AElement.cpp \
 		$(SRCDIR)/Serialization/XMLSerializer.cpp \
-		$(SRCDIR)/UT/ElementsUT.cpp
-			
+		$(SRCDIR)/UT/ElementsUT.cpp 
+					
 
-EXE := GenericServiceUT
+EXE := GenericServiceUT_EXE
 
 OBJ := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 

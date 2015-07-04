@@ -18,6 +18,7 @@
 #include <cstdlib>
 
 
+
 namespace Elements {
 
 //typedef SubElmsType
@@ -85,6 +86,12 @@ public:
 		}
 
 		return retElms;
+	}
+
+	virtual std::string GetDataTypeStr() const {
+		std::stringstream out;
+		out<<typeid(m_data).name();
+		return out.str();
 	}
 
 	virtual IElement* Clone() const {

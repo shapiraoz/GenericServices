@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include "../Elements/AElement.h"
 #include "../Serialization/XMLSerializer.h"
-
+#include "../Types.h"
 
 using namespace Elements;
 
 #define LINE "==============================================="
 #define PRINT_LINE std::cout <<LINE  <<std::endl
-
+#define PRINT_ASSERT(test, assert)   std::cout <<test <<" result :" << ((assert)? "Pass":"Failed")<<std::endl
 
 //move to templet function.
 template<class T>
@@ -85,16 +85,29 @@ void runToStringTest(T dataA,U dataB){
 	std::cout<<"result print :" <<t.ToString();
 }
 
+bool testTypes()
+{
+	PRINT_LINE;
+	std::cout<<"testing Tyeps convertor "<<std::endl;
+	PRINT_ASSERT("Types",(Types::GetInstance().GetType(typeid(int).name()) == "int"));
+
+
+	return false;
+}
+
 int main()
 {
-	int t;
-	
+	testTypes();
 	testAbstartInterger<int>(6);
+	std::cout <<"typeid(int)="<<typeid(int).name() <<std::endl;
+	std::cout <<"typeid(std::string)="<<typeid(std::string	).name() <<std::endl;
 	testAbstartInterger<std::string>("koko");
 	testConcarnetElemnets<int,std::string>(5,"colo");
 	runToStringTest<int,std::string>(2,"sos");
 	IElement* aq = new AElement<int>(5);
 	aq->AddElemnet(new AElement<std::string> ("koko"));
+	IElement* ab = new AElement<std::string> ("ffa");
+	std::cout <<"data type of ab is "<< ab->GetDataTypeStr()<<std::endl;
 	Serialization::ISerializer* ser = new Serialization::XMLSerializer(aq,"test.xml");
 	ser->Serialize();
 	//std::cin>>t;

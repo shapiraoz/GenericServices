@@ -43,6 +43,7 @@ public:
 	virtual std::string GetName() const =0;
 	virtual KeyType GetId() const= 0;
 	virtual std::string GetIdStr() const =0;
+	virtual std::string GetDataTypeStr() const =0;
 	virtual IElement* operator = (const IElement* elm)=0;
 	virtual IElement* operator = (std::pair<KeyType, IElement*> elm) =0;
 	virtual std::string ToString()=0;
