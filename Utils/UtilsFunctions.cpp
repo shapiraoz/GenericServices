@@ -7,10 +7,9 @@
 
 #include "UtilsFunctions.h"
 #include <stdlib.h>
-
-
+#ifdef BOOST
 #include <boost/lexical_cast.hpp>
-
+#endif
 
 UtilsFunctions::UtilsFunctions() {
 	// TODO Auto-generated constructor stub
@@ -30,7 +29,14 @@ int UtilsFunctions::GetRandomNumber()
 
 std::string UtilsFunctions::GetRandomNumberSTR()
 {
+#ifdef BOOST
 	int number = GetRandomNumber();
 	return boost::lexical_cast<std::string>(number);
+#else
+	char result[16];
+	sprintf ( Result, "%d", Number );
+	return result;
+#endif
+
 
 }

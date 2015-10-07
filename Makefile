@@ -24,7 +24,7 @@ EXE := GenericServiceUT_EXE
 
 OBJ := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 
-CFLAGS := -c $(addprefix -I, $(INCDIR)) -O2 -Wall
+CFLAGS := -c $(addprefix -I, $(INCDIR)) -O2 -Wall -D BOOST # for now based that we have boost 
 
 DBGFLAGS := -g3 -rdynamic -DPROFILER #-pg
 

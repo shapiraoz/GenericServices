@@ -7,12 +7,13 @@
 
 #include "XMLSerializer.h"
 #include  <vector>
-#include "../Utils/UtilsFunctions.h"
 
 
 namespace Serialization {
 
-
+#define ATTRIBUTE_TYPE_ID "Element.<xmlattr>.ID"
+#define ATTRIBUTE_TYPE_NAME "Element.<xmlattr>.Name"
+#define ATTRIBUTE_TYPE_TYPE "Element.<xmlattr>.Type"
 
 
 XMLSerializer::XMLSerializer( IElement* elm,const std::string & filePath):ASerializer(elm) {
@@ -57,9 +58,9 @@ bool XMLSerializer::Serialize() {
 	 	try
 	 	{
 	 		ptree & node =  m_pt.add("Element",m_element->GetDataSting());
-	 		m_pt.add("Element.<xmlattr>.ID",UtilsFunctions::GetRandomNumberSTR());// replace in random...
-	 		m_pt.add("Element.<xmlattr>.Name",m_element->GetName());
-	 		m_pt.add("Element.<xmlattr>.Type",m_element->GetDataTypeStr());
+	 		m_pt.add(ATTRIBUTE_TYPE_ID,m_element->GetIdStr());// replace in random...
+	 		m_pt.add(ATTRIBUTE_TYPE_NAME,m_element->GetName());
+	 		m_pt.add(ATTRIBUTE_TYPE_TYPE,m_element->GetDataTypeStr());
 
 	 		std::vector<IElement*> subelm = m_element->GetElemnets();
 
@@ -68,9 +69,11 @@ bool XMLSerializer::Serialize() {
 
 	 			IElement* elm = *it;
 	 			node.add("Element",elm->GetDataSting());
-	 			node.add("Element.<xmlattr>.Id",elm->GetIdStr());
-	 			node.add("Element.<xmlattr>.Name",elm->GetName());
-	 			//node.add_child("Elements",subNode);
+	 			node.add(ATTRIBUTE_TYPE_ID,elm->GetIdStr());
+	 			node.add(ATTRIBUTE_TYPE_NAME,elm->GetName());
+	 			node.add(ATTRIBUTE_TYPE_TYPE,elm->GetDataTypeStr());
+
+
 
 	 		}
 	 		//boost::property_tree::xml_writer_settings<char> settings('\t', 1);
