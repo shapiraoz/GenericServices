@@ -13,7 +13,8 @@ SRCDIR := .
 INCDIR := .
 OBJDIR := .
 
-SRC :=  	$(SRCDIR)/Types.cpp \
+SRC :=  	$(SRCDIR)/Utils/Types.cpp \
+		$(SRCDIR)/Utils/UtilsFunctions.cpp \
 		$(SRCDIR)/Elements/AElement.cpp \
 		$(SRCDIR)/Serialization/XMLSerializer.cpp \
 		$(SRCDIR)/UT/ElementsUT.cpp 

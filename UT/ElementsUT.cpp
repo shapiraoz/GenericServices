@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "../Elements/AElement.h"
 #include "../Serialization/XMLSerializer.h"
-#include "../Types.h"
+#include "../Utils/Types.h"
 
 using namespace Elements;
 

@@ -7,7 +7,12 @@
 
 #include "XMLSerializer.h"
 #include  <vector>
+#include "../Utils/UtilsFunctions.h"
+
+
 namespace Serialization {
+
+
 
 
 XMLSerializer::XMLSerializer( IElement* elm,const std::string & filePath):ASerializer(elm) {
@@ -52,7 +57,7 @@ bool XMLSerializer::Serialize() {
 	 	try
 	 	{
 	 		ptree & node =  m_pt.add("Element",m_element->GetDataSting());
-	 		m_pt.add("Element.<xmlattr>.ID","123");
+	 		m_pt.add("Element.<xmlattr>.ID",UtilsFunctions::GetRandomNumberSTR());// replace in random...
 	 		m_pt.add("Element.<xmlattr>.Name",m_element->GetName());
 	 		m_pt.add("Element.<xmlattr>.Type",m_element->GetDataTypeStr());
 
